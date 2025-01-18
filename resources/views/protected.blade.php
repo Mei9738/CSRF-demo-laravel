@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,4 +15,4 @@
 
     <a href="/demo">Back to Demo</a>
 </body>
-</html>
+</html> -->

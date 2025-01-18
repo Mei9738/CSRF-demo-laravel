@@ -1,4 +1,4 @@
-<x-navbar />
+<!-- <x-navbar />
 <h1>CSRF Demo</h1>
 
 <h2>Unprotected Form</h2>
@@ -14,4 +14,4 @@
     <button type="submit">Submit (Protected)</button>
 </form>
 
-<a href="/">Back to Home</a>
+<a href="/">Back to Home</a> -->
