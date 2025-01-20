@@ -14,5 +14,5 @@
 <!-- Malicious Form (Simulate Attack) -->
 <form action="/profile-protected" method="POST">
     <input type="text" name="name" value="Malicious User">
-    <button type="submit">Malicious Submit (No CSRF)</button>
+    <button type="submit">Malicious Submit (Enabled CSRF)</button>
 </form>
