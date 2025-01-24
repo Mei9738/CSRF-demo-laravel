@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             '/profile-vulnerable',
             '/profile-unprotected',
+            '/csrf-demo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

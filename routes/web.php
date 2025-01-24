@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\CSRFController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -45,3 +45,10 @@ Route::post('/profile-unprotected', function (Request $request) {
     // This route will fail with a 419 error unless you bypass CSRF checks.
     return "Unprotected Profile Submitted: " . $request->input('name');
 });
+
+Route::get('/csrf-demo', function () {
+    $step = request('step', 1); // Default to scene 1 if no step is provided
+    return view('csrf-demo', ['step' => $step]);
+})->name('csrf.demo');
+
+Route::post('/csrf-demo', [CSRFController::class, 'showScene']);
