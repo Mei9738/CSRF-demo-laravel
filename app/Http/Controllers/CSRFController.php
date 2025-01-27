@@ -8,19 +8,15 @@ class CSRFController extends Controller
 {
     public function showScene(Request $request)
     {
-        // Get the current step, default to 1
-        $step = $request->query('step', 1);
+        // Retrieve the step parameter from the request, defaulting to 1
+        $step = $request->input('step', 1);
 
-        if ($step === 'phishing-success') {
-            // Retrieve submitted form data
-            $submittedData = $request->only(['name', 'address', 'phone']);
-            return view('csrf-demo', [
-                'step' => $step,
-                'submittedData' => $submittedData,
-            ]);
+        // Check if the step parameter is valid
+        if (!in_array($step, [1, 2, 'phishing', 'phishing-success', 3])) {
+            return redirect()->route('csrf.demo', ['step' => 1])->with('error', 'Invalid step provided.');
         }
 
-        // Return the Blade view with the current step
+        // Load the appropriate view with the step information
         return view('csrf-demo', ['step' => $step]);
     }
 }
