@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSRF Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -14,10 +10,10 @@
             @if ($step == 1)
                 {{-- Scene 1: User Logs In --}}
                 <div class= "py-16 px-12">
-                    <h1 class="text-2-xl font-bold mb-6">Scene 1: The User Logs In</h1>
+                    <h1 class="text-2xl font-bold mb-6">Scene 1: The User Logs In</h1>
                     <div>
                         <p class="mb-6">
-                            Yesterday, you logged into your account on your favorite website—let’s call it "SecureSite." 
+                            Yesterday, you logged into your account on your favorite website—let’s call it "Oceana." 
                             You entered your credentials, and everything worked fine. You went about your day, and now today, 
                             you’re still logged in, your session is still active.
                         </p>
@@ -44,7 +40,7 @@
                         <p>Best regards,<br>The SecureSite Team</p>
                     -->
 
-                    // The email
+                    <!-- The email -->
                     <div class="p-4 rounded border mb-6">
                         <table align="center" width="100%" style="box-sizing:border-box;border-spacing:0;border-collapse:collapse;max-width:544px;margin-right:auto;margin-left:auto;width:100%!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">
                             <tbody>
@@ -223,44 +219,188 @@
 
             @elseif ($step == 'phishing')
                 {{-- Scene 3: Phishing Page --}}
-                <h1 class="text-2xl font-bold mb-4">Scene 3: Phishing Page</h1>
-                <p class="mb-6">Welcome to the fake SecureSite password reset page. Enter your details below:</p>
-                <form action="{{ route('csrf.demo', ['step' => 'phishing-success']) }}" method="POST" class="bg-gray-100 p-4 rounded border">
-                    @csrf
-                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name:</label>
-                    <input type="text" id="name" name="name" class="mt-2 p-2 w-full border rounded mb-4" placeholder="Full Name" value="John Doe">
+                <div class= "py-16 px-12">
+                    <h1 class="text-2xl font-bold mb-4">Scene 3: Phishing Page</h1>
+                    <div class="p-8 rounded border mb-6">
+                        <form action="{{ route('csrf.demo', ['step' => 'phishing-success']) }}" method="POST">
+                            <div class="space-y-12">
+                                <div class="border-b border-gray-900/10 pb-12">
+                                    <h2 class="text-base/7 font-semibold text-gray-900">Account Setting</h2>
+                                    <p class="mt-1 text-sm/6 text-gray-600">Use a permanent address where you can receive mail.</p>
 
-                    <label for="address" class="block text-sm font-medium text-gray-700">Address:</label>
-                    <input type="text" id="address" name="address" class="mt-2 p-2 w-full border rounded mb-4" placeholder="123 Fake Street" value="123 Fake Street">
+                                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                        <div class="sm:col-span-3">
+                                            <label for="first-name" class="block text-sm/6 font-medium text-gray-900">First name</label>
+                                            <div class="mt-2">
+                                                <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" value="John">
+                                            </div>
+                                        </div>
 
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number:</label>
-                    <input type="text" id="phone" name="phone" class="mt-2 p-2 w-full border rounded mb-4" placeholder="+123456789" value="+123456789">
+                                        <div class="sm:col-span-3">
+                                            <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Last name</label>
+                                            <div class="mt-2">
+                                            <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm " value="Doe">
+                                            </div>
+                                        </div>
 
-                    <label for="password" class="block text-sm font-medium text-gray-700">Enter New Password:</label>
-                    <input type="password" id="password" name="password" class="mt-2 p-2 w-full border rounded mb-4" placeholder="New Password">
+                                        <div class="sm:col-span-4">
+                                            <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
+                                            <div class="mt-2">
+                                            <input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" value="johndoe@example.com">
+                                            </div>
+                                        </div>
 
-                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Your New Password:</label>
-                    <input type="password" id="confirm-password" name="confirm-password" class="mt-2 p-2 w-full border rounded" placeholder="Confirm Password">
+                                        <div class="col-span-full">
+                                            <label for="street-address" class="block text-sm/6 font-medium text-gray-900">Street address</label>
+                                            <div class="mt-2">
+                                            <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" value="123 Maple St">
+                                            </div>
+                                        </div>
 
-                    <button type="submit" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                        Update
-                    </button>
-                </form>
+                                        <div class="sm:col-span-2 sm:col-start-1">
+                                            <label for="city" class="block text-sm/6 font-medium text-gray-900">City</label>
+                                            <div class="mt-2">
+                                            <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" value="Springfield">
+                                            </div>
+                                        </div>
 
+                                        <div class="sm:col-span-2">
+                                            <label for="region" class="block text-sm/6 font-medium text-gray-900">State / Province</label>
+                                            <div class="mt-2">
+                                            <input type="text" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" value="Illinois">
+                                            </div>
+                                        </div>
+
+                                        <div class="sm:col-span-2">
+                                            <label for="postal-code" class="block text-sm/6 font-medium text-gray-900">ZIP / Postal code</label>
+                                            <div class="mt-2">
+                                            <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" value="62701">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                    <div class="sm:col-span-4">
+                                        <label for="password" class="block text-sm/6 font-medium text-gray-900">New password</label>
+                                        <div class="mt-2">
+                                            <input type="password" name="password" id="password" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm">
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-4">
+                                        <label for="confirm-password" class="block text-sm/6 font-medium text-gray-900">Confirm password</label>
+                                        <div class="mt-2">
+                                            <input type="password" name="confirm-password" id="sconfirm-password" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm">
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+
+                            <div class="mt-6 flex items-center justify-end gap-x-6">
+                                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                            </div>  
+                        </form>
+                    </div>
+                </div>
             @elseif ($step == 'phishing-success')
                 {{-- Scene 4: Phishing Success --}}
-                <h1 class="text-2xl font-bold mb-4">Scene 4: Details Updated Successfully</h1>
-                <p class="mb-6">Your details have been updated. Thank you!</p>
-                <div class="bg-gray-100 p-4 rounded border">
+                <div class= "py-16 px-12">
+                    <h1 class="text-2xl font-bold mb-4">Scene 4: Details Updated Successfully</h1>
+                    <p class="mb-6">Your details have been updated. Thank you!</p>
+                    <!-- Button to open the modal -->
+                    <div class="mt-6 flex items-center justify-end gap-x-6">
+                        <!-- modal trigger -->
+                        <div>
+                            <label for="tw-modal" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                Done!
+                            </label>
+                        </div>
+                        
+                        <!-- hidden toggle -->
+                        <input type="checkbox" id="tw-modal" class="peer fixed appearance-none opacity-0">
+
+                        <!-- Modal -->
+                        <label for="tw-modal" class="pointer-events-none invisible fixed inset-0 cursor-pointer items-center justify-center transition-all duration-100 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
+                            <!-- Modal backdrop -->
+                            <div class="fixed inset-0 z-50 bg-gray-500/50 transition-opacity"></div>
+
+                            <!-- modal box -->
+                            <div class=" flex items-center justify-center fixed inset-0 z-50">
+                                <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                <div class="sm:flex sm:items-start">
+                                                    <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
+                                                        <svg class="size-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="bg-white mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                                        <h3 class="text-base font-semibold text-gray-900 mt-2" id="modal-title">What Just Happened?</h3>
+                                                        <ul role="list" class="mt-2 list-disc">
+                                                            <li class="text-sm text-gray-600 mb-1">You were logged into Oceana</li>
+                                                            <li class="text-sm text-gray-600 mb-1">You received a phishing email that made you think it was a legitimate request from the site.</li>
+                                                            <li class="text-sm text-gray-600 mb-1">You clicked the link in the email and were taken to an account setting page.</li>
+                                                            <li class="text-sm text-gray-600">The malicious page automatically submitted the form to the real Oceana, and because there was no CSRF protection, the site processed it without checking if the request was legitimate.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                                <a href="{{ route('csrf.demo', ['step' => 'A_Solution']) }}" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">See the solution</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- <div class="bg-gray-100 p-4 rounded border">
                     <p><strong>Name:</strong> {{ request('name') }}</p>
                     <p><strong>Address:</strong> {{ request('address') }}</p>
                     <p><strong>Phone Number:</strong> {{ request('phone') }}</p>
                     <p><strong>Password:</strong> {{ request('password') }}</p>
-                </div>
-                <a href="{{ route('csrf.demo', ['step' => 1]) }}" class="mt-6 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                </div> -->
+                <!-- <a href="{{ route('csrf.demo', ['step' => 1]) }}" class="mt-6 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                     Start Over
-                </a>
+                </a> -->
+            @elseif ($step == 'A_Solution')
+                {{-- Scene 5: A Solution (CSRF Protection) --}}
 
+                <!-- Needs more styling since it doesn't look appealing -->
+                <div class= "py-16 px-12">
+                    <h1 class="text-2xl font-bold mb-4">Now, let’s show how Oceana can prevent this from happening by using CSRF protection in Laravel.</h1>
+
+                    <div class="mb-6">
+                        <h2 class="text-lg font-semibold px-2">CSRF Token: The Fix</h2>
+                        <ul role="list" class="mt-2 list-disc px-7">
+                            <li class="text-base text-gray-600 mb-1">In Laravel, CSRF protection is enabled by default.</li>
+                            <li class="text-base text-gray-600 mb-1">If Oceana had CSRF protection, the password reset form would include a CSRF token to verify that the form is actually coming from the user who logged in and not from a malicious site.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6 text-base">
+                        <p>Let’s see how we can protect this form using Tailwind and Laravel CSRF Protection.</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-lg font-semibold px-2">What happens with CSRF protection?</h2>
+                        <ul role="list" class="mt-2 list-disc px-7">
+                            <li class="text-base text-gray-600 mb-1">When you submit the form, the server checks the CSRF token.</li>
+                            <li class="text-base text-gray-600 mb-1">If the token is missing or invalid (like in the case of a malicious attack), the server will reject the request with a 419 Page Expired error.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6 text-base">
+                        <p>This is exactly what happens when an attacker tries to trick you into resetting your password—the form won't be accepted without a valid CSRF token.</p>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-end gap-x-6">
+                        <a href="{{ route('csrf.demo', ['step' => 'Lets_Test_It']) }}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Next</a>
+                    </div>
+                </div>
             @else
                 {{-- Invalid Step --}}
                 <h1 class="text-2xl font-bold text-red-500">Invalid Scene</h1>
