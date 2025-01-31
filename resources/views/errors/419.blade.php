@@ -542,7 +542,7 @@
             </div>
 
 
-            <p class="mt-4 text-gray-500">
+            <!-- <p class="mt-4 text-gray-500">
                 Oops! This request failed because it was not protected against CSRF attacks.
             </p>
 
@@ -554,18 +554,26 @@
             </p>
             <p class="mt-2 text-gray-500">
                 CSRF tokens are essential to ensure form requests are authentic and not sent by malicious third parties.
-            </p>
+            </p> -->
+            <div class="flex items-center pt-8 sm:justify-start sm:pt-0 mt-8">
+                <!-- <a href="/about"
+                    class="inline-block px-6 py-2 bg-blue-500 text-gray-500 font-medium rounded-lg hover:bg-blue-600">
+                    Learn More About CSRF
+                </a>
+                <a href="/demo"
+                    class="inline-block px-6 py-2 bg-gray-500 text-gray-500 font-medium rounded-lg hover:bg-gray-600 ml-2">
+                    Back to Demo
+                </a> -->
 
-            <a href="/about"
-                class="inline-block px-6 py-2 bg-blue-500 text-gray-500 font-medium rounded-lg hover:bg-blue-600">
-                Learn More About CSRF
-            </a>
-            <a href="/demo"
-                class="inline-block px-6 py-2 bg-gray-500 text-gray-500 font-medium rounded-lg hover:bg-gray-600 ml-2">
-                Back to Demo
-            </a>
-
+                <a href="{{ route('csrf.demo', ['step' => 'Lets_Test_It']) }}" class="inline-block px-6 py-2 bg-gray-500 text-gray-500 text-lg font-semibold rounded-lg hover:bg-gray-600 ml-2">
+                    Back
+                </a>
+                <a href="{{ route('csrf.demo', ['step' => 'A_Conclusion']) }}" class="inline-block px-6 py-2 bg-gray-500 text-gray-500 text-lg font-semibold rounded-lg hover:bg-gray-600 ml-2">
+                    Next
+                </a>
+            </div>
         </div>
+        
 </body>
 
 </html> 

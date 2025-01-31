@@ -401,6 +401,241 @@
                         <a href="{{ route('csrf.demo', ['step' => 'Lets_Test_It']) }}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Next</a>
                     </div>
                 </div>
+            @elseif ($step == 'Lets_Test_It')
+                {{-- Scene 6: A Solution (CSRF Protection) --}}
+
+                <!-- Needs more styling since it doesn't look appealing -->
+                <div class= "py-16 px-12">
+                    <h1 class="text-2xl font-bold mb-4">Let's Test It</h1>
+                    <!-- <p class="mb-2">Let’s show this in action:</p> -->
+
+                    <div class="flex">
+                        <!-- Left section for the Vulnerable Form -->
+                        <div class="flex-1 p-4">
+                            <h2 class="text-xl font-semibold mb-4">Vulnerable Form</h2>
+                            <p class="mb-6">Without the CSRF token, you’re able to submit the password reset request, and the attacker can change your password.</p>
+                            
+                            <!-- Vulnerable Form -->
+                            <form id="vuln-form" action="/profile-vulnerable" method="POST">
+                                <input type="text" name="name" value="User 1" class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm">
+                                <button for="vulnerable" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit (No CSRF)</button>
+                            </form>
+
+                            <!-- hidden toggle -->
+                            <input type="checkbox" id="vulnerable" class="peer fixed appearance-none opacity-0">
+
+                            <!-- Modal -->
+                            <label for="vulnerable" class="pointer-events-none invisible fixed inset-0 cursor-pointer items-center justify-center transition-all duration-100 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
+                                <!-- Modal backdrop -->
+                                <div class="fixed inset-0 z-50 bg-gray-500/50 transition-opacity"></div>
+
+                                <!-- modal box -->
+                                <div class="flex items-center justify-center fixed inset-0 z-50">
+                                    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                        <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                                            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                    <div class="sm:flex sm:items-center sm:justify-center">
+                                                        <div class="mx-auto flex items-center justify-center bg-green-100 rounded-full w-16 h-16 sm:w-12 sm:h-12">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="text-green-600 w-8 h-8">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bg-white mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
+                                                        <h3 class="text-base font-semibold text-gray-900 mt-2" id="modal-title">Updated Successfully</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                                    <button id="A" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <script>
+                                // Function to prevent form submission and open the modal
+                                document.getElementById('vuln-form').addEventListener('submit', function(event) {
+                                    event.preventDefault();
+                                    openModal(); 
+                                });
+
+                                // Function to open the modal
+                                function openModal() {
+                                    document.getElementById('modal').style.display = 'flex'; 
+                                    document.getElementById('att-vuln').checked = true; 
+                                }
+
+                                // Function to close the modal
+                                document.getElementById('A').addEventListener('click', function() {
+                                    document.getElementById('modal').style.display = 'none';
+                                    document.getElementById('att-vuln').checked = false; 
+                                });
+                            </script>
+
+                            <!-- Malicious Form -->
+                            <form id="att-vuln-form" action="/profile-vulnerable" method="POST">
+                                <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="Malicious User 1">
+                                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Malicious Submit (no CSRF)</button>
+                            </form>
+
+                            <!-- Hidden Toggle -->
+                            <input type="checkbox" id="att-vuln" class="peer fixed appearance-none opacity-0">
+
+                            <!-- Modal -->
+                            <label for="att-vuln" class="pointer-events-none invisible fixed inset-0 cursor-pointer items-center justify-center transition-all duration-100 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
+                                <!-- Modal backdrop -->
+                                <div class="fixed inset-0 z-50 bg-gray-500/50 transition-opacity"></div>
+
+                                <!-- Modal Box -->
+                                <div id="modal" class="flex items-center justify-center fixed inset-0 z-50">
+                                    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                        <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                                            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                    <!-- Success Icon -->
+                                                    <div class="sm:flex sm:items-center sm:justify-center">
+                                                        <div class="mx-auto flex items-center justify-center bg-green-100 rounded-full w-16 h-16 sm:w-12 sm:h-12">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="text-green-600 w-8 h-8">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Success Message -->
+                                                    <div class="bg-white mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
+                                                        <h3 class="text-base font-semibold text-gray-900 mt-2" id="modal-title">Updated Successfully</h3>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Close Button -->
+                                                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                                    <button id="B" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <script>
+                                // Prevent form submission and open modal
+                                document.getElementById('att-vuln-form').addEventListener('submit', function(event) {
+                                    event.preventDefault(); 
+                                    openModal(); 
+                                });
+
+                                // Open the modal
+                                function openModal() {
+                                    document.getElementById('modal').style.display = 'flex'; 
+                                    document.getElementById('att-vuln').checked = true; 
+                                }
+
+                                // Close the modal
+                                document.getElementById('B').addEventListener('click', function() {
+                                    document.getElementById('modal').style.display = 'none'; 
+                                    document.getElementById('att-vuln').checked = false; 
+                                });
+                            </script>
+
+                        </div>
+                        <!-- Divider Line -->
+                        <div class="border-l-2 h-full my-2"></div>
+
+                        <!-- Right section for the Protected Form -->
+                        <div class="flex-1 p-4">
+                            <h2 class="text-xl font-semibold mb-4">Protected Form</h2>
+                            <p class="mb-6">With the CSRF token, the form will be rejected if the attacker tries to submit a form without the correct token.</p>
+
+                            <!-- Protected Form -->
+                            <form id="safe-form" action="/profile-protected" method="POST">
+                                @csrf
+                                <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="User 2">
+                                <button for="safe" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit">Submit (With CSRF)</button>
+                            </form>    
+
+                                <!-- hidden toggle -->
+                                <input type="checkbox" id="safe" class="peer fixed appearance-none opacity-0">
+                                <!-- Modal -->
+                                <label for="safe" class="pointer-events-none invisible fixed inset-0 cursor-pointer items-center justify-center transition-all duration-100 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
+                                    <!-- Modal backdrop -->
+                                    <div class="fixed inset-0 z-50 bg-gray-500/50 transition-opacity"></div>
+
+                                    <!-- modal box -->
+                                    <div class="flex items-center justify-center fixed inset-0 z-50">
+                                        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                            <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                                                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                        <div class="sm:flex sm:items-center sm:justify-center">
+                                                            <div class="mx-auto flex items-center justify-center bg-green-100 rounded-full w-16 h-16 sm:w-12 sm:h-12">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="text-green-600 w-8 h-8">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <div class="bg-white mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
+                                                            <h3 class="text-base font-semibold text-gray-900 mt-2" id="modal-title">Updated Successfully</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                                        <button id="C" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">
+                                                            Close
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <script>
+                                    // Function to prevent form submission and open the modal
+                                    document.getElementById('safe-form').addEventListener('submit', function(event) {
+                                        event.preventDefault(); 
+                                        openModal(); 
+                                    });
+
+                                    // Function to open the modal
+                                    function openModal() {
+                                        document.getElementById('modal').style.display = 'flex'; 
+                                        document.getElementById('att-vuln').checked = true; 
+                                    }
+
+                                    // Function to close the modal
+                                    document.getElementById('C').addEventListener('click', function() {
+                                        document.getElementById('modal').style.display = 'none'; 
+                                        document.getElementById('att-vuln').checked = false; 
+                                    });
+                                </script>
+
+                            <!-- Malicious Form -->
+                            <form action="/profile-protected" method="POST">
+                                <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="Malicious User 2">
+                                <button class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit">Malicious Submit (With CSRF)</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+            @elseif ($step == 'A_Conclusion')
+                {{-- Scene 7: A Conclusion --}}
+                <div class= "py-16 px-12">
+                    <h1 class="text-2xl font-bold mb-4">And Finally..</h1>
+                    <p class="mb-6">
+                        We reached the end of our demo, you've seen how CSRF works in real-world scenario,
+                        a phishing email that leads to an attack and how CSRF protection is must because it can
+                        save users from this kind of attack by validation requests before they're processed.
+                        </br>
+                       You can learn more about CSRF by going to our about page or you can retry this mini demo. </br> Thank you!
+                    </p>
+                </div>     
             @else
                 {{-- Invalid Step --}}
                 <h1 class="text-2xl font-bold text-red-500">Invalid Scene</h1>
