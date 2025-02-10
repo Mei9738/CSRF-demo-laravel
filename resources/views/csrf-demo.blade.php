@@ -18,7 +18,7 @@
                             you’re still logged in, your session is still active.
                         </p>
                     </div>
-                    <a href="{{ route('csrf.demo', ['step' => 2]) }}" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 float-right">
+                    <a href="{{ route('csrf.demo', ['step' => 2]) }}" class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 float-right">
                         Next
                     </a>
                 </div>
@@ -622,6 +622,10 @@
                             </form>
                         </div>
                     </div>
+
+                    <a href="{{ route('csrf.demo', ['step' => 'A_Conclusion']) }}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 float-right">
+                        Next
+                    </a>
                 </div>
             
             @elseif ($step == 'A_Conclusion')
@@ -635,7 +639,11 @@
                         </br>
                        You can learn more about CSRF by going to our about page or you can retry this mini demo. </br> Thank you!
                     </p>
-                </div>     
+                    <a href="{{ route('csrf.demo', ['step' => 1]) }}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 float-right">
+                        Start Over
+                    </a> 
+                </div> 
+
             @else
                 {{-- Invalid Step --}}
                 <h1 class="text-2xl font-bold text-red-500">Invalid Scene</h1>
