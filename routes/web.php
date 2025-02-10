@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 // });
 
 
+
+//csrf intro
+Route::get('/csrf-intro', [CSRFController::class, 'intro'])->name('csrf.intro');
+
+
 Route::post('/profile-vulnerable', function (Request $request) {
     // This route will fail with a 419 error because no CSRF token is provided.
     return "Vulnerable Form Submitted: " . $request->input('name');

@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class CSRFController extends Controller
 {
+
+    public function intro()
+    {
+        return view('csrf-intro');
+    }
+
+    
     public function showScene(Request $request)
     {
         // Retrieve the step parameter from the request, defaulting to 1
