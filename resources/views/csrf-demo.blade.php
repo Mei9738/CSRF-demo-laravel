@@ -1,9 +1,26 @@
 <head>
     <title>CSRF Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensure the content takes up at least the full height of the viewport */
+        html, body {
+            height: 100%;
+            margin: 0;
+            scroll-behavior: smooth;
+        }
+
+        /* Styling for the footer */
+        footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            padding: 20px;
+        }
+
+    </style>
 </head>
 <body class="bg-stone-100 min-h-screen py-40">
-@include('components.navbar') <!-- Include your Navbar -->
+@include('components.navbar') <!-- Include Navbar -->
     <div class= "container mx-auto">
         <!-- <div class="max-w-3xl mx-10 mt-10 bg-gray-100 shadow-md rounded-lg p-12"> -->
             <div class = "w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
@@ -656,4 +673,5 @@
         </div>
     </div>
 </body>
+@include('components.footer') <!-- Include Footer -->
 </html>

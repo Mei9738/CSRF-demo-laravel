@@ -56,7 +56,7 @@
         
 </head>
 <body>
-@include('components.navbar') <!-- Include your Navbar -->
+@include('components.navbar') <!-- Include Navbar -->
 <nav class="col-md-2 d-none d-md-block side-menu">
     <h5>CSRF Guide</h5>
     <a href="#intro">Introduction</a>
@@ -221,6 +221,6 @@
         });
     });
 </script>
-
+@include('components.footer') <!-- Include Footer -->
 </body>
 </html>
