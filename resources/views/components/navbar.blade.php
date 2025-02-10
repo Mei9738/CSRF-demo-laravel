@@ -1,64 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')  <!-- Add this line -->
-</head>
-<body>
-    <div>
-      <nav class="bg-gray-800">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div class="relative flex h-16 items-center justify-between">
-            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <!-- Mobile menu button-->
-              <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
-                <span class="absolute -inset-0.5"></span>
-                <span class="sr-only">Open main menu</span>
-                <!--
-                  Icon when menu is closed.
+<!-- resources/views/components/nav.blade.php -->
+<nav class="bg-white shadow-md fixed top-0 w-full z-10">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <a class="text-lg font-semibold text-gray-800" href="{{ route('csrf.intro') }}">CSRF APP</a>
+        
+        <button id="menu-toggle" class="text-gray-800 focus:outline-none md:hidden">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
 
-                  Menu open: "hidden", Menu closed: "block"
-                -->
-                <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-                <!--
-                  Icon when menu is open.
-
-                  Menu open: "block", Menu closed: "hidden"
-                -->
-                <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              </button>
+        <div id="menu" class="hidden md:flex space-x-6">
+            <div class="relative group">
+                <button class="nav-link">CSRF</button>
+                <ul class="absolute left-0 mt-2 w-40 bg-white shadow-md rounded-lg py-2 hidden group-hover:block">
+                    <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="{{ route('csrf.intro') }}">General Intro</a></li>
+                    <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">About</a></li>
+                </ul>
             </div>
-            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div class="flex shrink-0 items-center">
-                <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-              </div>
-              <div class="hidden sm:ml-6 sm:block">
-                <div class="flex space-x-4">
-                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                  <a href="/home" class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-                  <a href="/about" class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">About</a>
-                  <a href="/demo" class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Demo</a>
-                </div>
-              </div>
-            </div>
-          </div>
+            <a class="nav-link font-semibold text-blue-600" href="{{ route('csrf.demo') }}">CSRF Demos</a>
+            <!-- <div class="relative group">
+                <button class="nav-link">More</button>
+                <ul class="absolute left-0 mt-2 w-40 bg-white shadow-md rounded-lg py-2 hidden group-hover:block">
+                    <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Documentation</a></li>
+                    <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">About</a></li>
+                </ul>
+            </div> -->
         </div>
+    </div>
+</nav>
 
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="sm:hidden" id="mobile-menu">
-          <div class="space-y-1 px-2 pt-2 pb-3">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="/home" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</a>
-            <a href="/about" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-            <a href="/demo" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Demo </a>
-          </div>
-        </div>
-      </nav>
-      </div>
-</body>
-</html>
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('menu').classList.toggle('hidden');
+    });
+</script>
+
+<style>
+    .nav-link {
+        @apply text-gray-800 hover:text-blue-600 px-4 py-2;
+    }
+</style>

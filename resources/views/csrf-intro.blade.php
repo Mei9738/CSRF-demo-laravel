@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Ensure the content takes up at least the full height of the viewport */
         html, body {
@@ -56,7 +56,7 @@
         
 </head>
 <body>
-
+@include('components.navbar') <!-- Include your Navbar -->
 <nav class="col-md-2 d-none d-md-block side-menu">
     <h5>CSRF Guide</h5>
     <a href="#intro">Introduction</a>

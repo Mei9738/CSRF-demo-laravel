@@ -3,6 +3,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-stone-100 min-h-screen py-40">
+@include('components.navbar') <!-- Include your Navbar -->
     <div class= "container mx-auto">
         <!-- <div class="max-w-3xl mx-10 mt-10 bg-gray-100 shadow-md rounded-lg p-12"> -->
             <div class = "w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
