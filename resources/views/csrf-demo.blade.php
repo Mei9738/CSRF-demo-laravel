@@ -1,5 +1,5 @@
 <head>
-    <title>CSRF Demo</title>
+    <title>CSRF LAB</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Ensure the content takes up at least the full height of the viewport */

@@ -17,7 +17,7 @@
                     <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">About</a></li>
                 </ul>
             </div>
-            <a class="nav-link font-semibold text-blue-600" href="{{ route('csrf.demo') }}">CSRF Demos</a>
+            <a class="nav-link font-semibold text-blue-600" href="{{ route('csrf.demo') }}">CSRF LAB</a>
             <!-- <div class="relative group">
                 <button class="nav-link">More</button>
                 <ul class="absolute left-0 mt-2 w-40 bg-white shadow-md rounded-lg py-2 hidden group-hover:block">
