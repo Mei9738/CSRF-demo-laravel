@@ -89,7 +89,7 @@
         <p>Laravel uses CSRF tokens to validate form submissions. These tokens prevent malicious requests by ensuring they originate from the authenticated user.</p>
         
         <h4 class="mt-4 font-semibold">✅ Safe Form Example:</h4>
-        <pre class="bg-gray-100 p-3 rounded">
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto whitespace-pre-wrap text-left">
             &lt;form action="/submit" method="POST"&gt;
                 @csrf
                 &lt;input type="text" name="name" required&gt;
@@ -98,7 +98,7 @@
         </pre>
         
         <h4 class="mt-4 font-semibold">🔴 Unsafe Example:</h4>
-        <pre class="bg-gray-100 p-3 rounded">
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto whitespace-pre-wrap text-left">
             &lt;img src="https://bank.com/transfer?amount=1000&to=attacker" /&gt;
         </pre>
         
@@ -123,7 +123,7 @@
             <li>✅<strong> No unpredictable request parameters.</strong> The attacker can determine or guess the necessary request parameters.</li>
         </ul>
         <p class="mt-4">Example request that allows CSRF:</p>
-        <pre class="bg-gray-100 p-3 rounded">
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto whitespace-pre-wrap text-left">
             POST /email/change HTTP/1.1
             Host: vulnerable-website.com
             Content-Type: application/x-www-form-urlencoded
@@ -133,7 +133,7 @@
             email=wiener@normal-user.com
                     </pre>
                     <p class="mt-4">The attacker can construct the following malicious page:</p>
-                    <pre class="bg-gray-100 p-3 rounded">
+                    <pre class="bg-gray-100 p-4 rounded overflow-x-auto whitespace-pre-wrap text-left">
             &lt;html&gt;
                 &lt;body&gt;
                     &lt;form action="https://vulnerable-website.com/email/change" method="POST"&gt;
@@ -160,9 +160,9 @@
         <h4 class="text-lg font-semibold mt-4">How Laravel Handles CSRF</h4>
         <p class="mt-2">Laravel includes built-in CSRF protection by generating and verifying tokens for each form submission.</p>
         <p>To include a CSRF token in your form, use:</p>
-        <pre class="bg-gray-100 p-3 rounded">@csrf</pre>
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto whitespace-pre-wrap text-left">@ CSRF</pre>
         <p class="mt-2">Example form with CSRF protection:</p>
-        <pre class="bg-gray-100 p-3 rounded">
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto whitespace-pre-wrap text-left">
             &lt;form method="POST" action="/profile/update"&gt;
                 @csrf
                 &lt;input type="text" name="name" placeholder="Enter your name"&gt;
@@ -191,7 +191,7 @@
 
         <h3 class="text-xl font-semibold mt-4">How Should CSRF Tokens Be Transmitted?</h3>
         <p class="mt-2">CSRF tokens should be treated as secrets and handled in a secure manner throughout their lifecycle. An approach that is normally effective is to transmit the token to the client within a hidden field of an HTML form that is submitted using the POST method. The token will then be included as a request parameter when the form is submitted:</p>
-        <pre class="bg-gray-100 p-3 rounded">&lt;input type="hidden" name="csrf-token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz"&gt;</pre>
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto whitespace-pre-wrap text-left">&lt;input type="hidden" name="csrf-token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz"&gt;</pre>
     </div>
 </div>
 
