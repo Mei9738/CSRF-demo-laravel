@@ -416,24 +416,35 @@
 
                 <!-- Needs more styling since it doesn't look appealing -->
                 <div class= "py-16 px-12">
+
                     <h1 class="text-2xl font-bold mb-4">Hands-On: Test CSRF Protection</h1>
                     <!-- <p class="mb-2">Let’s show this in action:</p> -->
                     <p class="mb-6 text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-green-600">
                         <span class="font-semibold text-green-600">What's happening?</span><br>
                         Compare forms with and without CSRF protection to see the difference. This will help you understand how CSRF tokens prevent attacks.
                     </p>
+                    <!-- Update Message -->
+                        <span class="font-semibold text-green-600">
+                        @if (session('success'))
+                            <div class="text-green-500">{{ session('success') }}</div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="text-red-500">{{ session('error') }}</div>
+                        @endif</span><br>
+
                     <div class="flex">
                         <!-- Left section for the Vulnerable Form -->
                         <div class="flex-1 p-4">
                             <h2 class="text-xl font-semibold mb-4">Vulnerable Form</h2>
-                            <p class="mb-6">Without the CSRF token, you’re able to submit the password reset request, and the attacker can change your password.</p>
-                            
+                            <p class="mb-6">Without the CSRF token, you’re able to submit the password reset request, and the attacker can change your password.</p>                            
                             <!-- Vulnerable Form -->
                             <form id="vuln-form" action="/profile-vulnerable" method="POST">
-                                <input type="text" name="name" value="User 1" class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm">
+                                <!-- No CSRF token -->
+                                <input type="text" name="name" value="{{ $demo->name }}" class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm">
                                 <button for="vulnerable" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit (No CSRF)</button>
                             </form>
-
+                            
                             <!-- hidden toggle -->
                             <input type="checkbox" id="vulnerable" class="peer fixed appearance-none opacity-0">
 
@@ -470,7 +481,7 @@
                                 </div>
                             </label>
 
-                            <script>
+                            <!-- <script>
                                 // Function to prevent form submission and open the modal
                                 document.getElementById('vuln-form').addEventListener('submit', function(event) {
                                     event.preventDefault();
@@ -488,7 +499,7 @@
                                     document.getElementById('modal').style.display = 'none';
                                     document.getElementById('att-vuln').checked = false; 
                                 });
-                            </script>
+                            </script> -->
 
                             <!-- Malicious Form -->
                             <form id="att-vuln-form" action="/profile-vulnerable" method="POST">
@@ -496,15 +507,24 @@
                                 <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Malicious Submit (No CSRF)</button>
                             </form>
 
-                            <!-- Hidden Toggle -->
+                            <!-- Hidden Toggle for Simulating the Attack -->
                             <input type="checkbox" id="att-vuln" class="peer fixed appearance-none opacity-0">
+
+                            <!-- JavaScript to Automatically Submit the Form when Checkbox is Checked -->
+                            <script>
+                                document.getElementById('att-vuln').addEventListener('change', function() {
+                                    if (this.checked) {
+                                        document.getElementById('att-vuln-form').submit(); // Automatically submits the form
+                                    }
+                                });
+                            </script>
 
                             <!-- Modal -->
                             <label for="att-vuln" class="pointer-events-none invisible fixed inset-0 cursor-pointer items-center justify-center transition-all duration-100 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
                                 <!-- Modal backdrop -->
                                 <div class="fixed inset-0 z-50 bg-gray-500/50 transition-opacity"></div>
 
-                                <!-- Modal Box -->
+                                Modal Box
                                 <div id="modal" class="flex items-center justify-center fixed inset-0 z-50">
                                     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
                                         <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
@@ -537,7 +557,7 @@
                                 </div>
                             </label>
 
-                            <script>
+                            <!-- <script>
                                 // Prevent form submission and open modal
                                 document.getElementById('att-vuln-form').addEventListener('submit', function(event) {
                                     event.preventDefault(); 
@@ -555,7 +575,7 @@
                                     document.getElementById('modal').style.display = 'none'; 
                                     document.getElementById('att-vuln').checked = false; 
                                 });
-                            </script>
+                            </script> -->
 
                         </div>
                         <!-- Divider Line -->
@@ -569,7 +589,7 @@
                             <!-- Protected Form -->
                             <form id="safe-form" action="/profile-protected" method="POST">
                                 @csrf
-                                <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="User 2">
+                                <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="{{$demo->name}}">
                                 <button for="safe" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit">Submit (With CSRF)</button>
                             </form>    
 
@@ -608,7 +628,7 @@
                                     </div>
                                 </label>
 
-                                <script>
+                                <!-- <script>
                                     // Function to prevent form submission and open the modal
                                     document.getElementById('safe-form').addEventListener('submit', function(event) {
                                         event.preventDefault(); 
@@ -626,10 +646,10 @@
                                         document.getElementById('modal').style.display = 'none'; 
                                         document.getElementById('att-vuln').checked = false; 
                                     });
-                                </script>
+                                </script> -->
 
                             <!-- Malicious Form -->
-                            <form action="/profile-protected" method="POST">
+                            <form id="att-prot-form" action="/profile-protected" method="POST">
                                 <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="Malicious User 2">
                                 <button class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit">Malicious Submit (With CSRF)</button>
                             </form>

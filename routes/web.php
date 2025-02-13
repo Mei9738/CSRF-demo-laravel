@@ -11,15 +11,19 @@ use Illuminate\Http\Request;
 Route::get('/csrf-intro', [CSRFController::class, 'intro'])->name('csrf.intro');
 
 
-Route::post('/profile-vulnerable', function (Request $request) {
-    // This route will fail with a 419 error because no CSRF token is provided.
-    return "Vulnerable Form Submitted: " . $request->input('name');
-});
+// Route::post('/profile-vulnerable', function (Request $request) {
+//     // This route will fail with a 419 error because no CSRF token is provided.
+//     return "Vulnerable Form Submitted: " . $request->input('name');
+// });
+Route::post('/profile-vulnerable', [ProfileController::class, 'submitVulnerableForm']);
 
-Route::post('/profile-protected', function (Request $request) {
-    // This route will succeed because the @csrf token is included.
-    return "Protected Form Submitted: " . $request->input('name');
-});
+
+// Route::post('/profile-protected', function (Request $request) {
+//     // This route will succeed because the @csrf token is included.
+//     return "Protected Form Submitted: " . $request->input('name');
+// });
+Route::post('/profile-protected', [ProfileController::class, 'submitProtectedForm']);
+
 
 Route::post('/profile-unprotected', function (Request $request) {
     // This route will fail with a 419 error unless you bypass CSRF checks.
@@ -33,8 +37,21 @@ Route::get('/test-csrf', function () {
 
 
 Route::get('/csrf-demo', function () {
+    // Get the step parameter from the request, defaulting to 1
     $step = request('step', 1); // Default to scene 1 if no step is provided
-    return view('csrf-demo', ['step' => $step]);
+    
+    $demo = App\Models\Demo::find(1);
+    
+    if (!$demo) {
+        return redirect()->route('csrf.demo')->with('error', 'Demo data not found.');
+    }
+
+    // Return the view with the demo data and step
+    return view('csrf-demo', ['step' => $step, 'demo' => $demo]);
 })->name('csrf.demo');
 
+
 Route::post('/csrf-demo', [CSRFController::class, 'showScene']);
+
+
+
