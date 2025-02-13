@@ -30,10 +30,10 @@
                     <!-- Mobile CSRF Dropdown Link -->
                     <button id="dropdown-toggle" class="nav-link w-full text-left md:hidden">CSRF</button>
                     <!-- Desktop CSRF Link -->
-                    <a class="nav-link hidden md:block cursor-pointer">CSRF</a>
+                    <a class="nav-link hidden md:block cursor-pointer font-semibold" href="{{ route('csrf.intro') }}">CSRF Guide</a>
                     
                     <!-- Dropdown Menu -->
-                    <ul id="dropdown-menu"
+                    <!-- <ul id="dropdown-menu"
                         class="hidden md:absolute md:left-0 md:bg-white md:shadow-md md:rounded-lg md:w-40 md:py-2 group-hover:block transition-all duration-300 ease-in-out">
                         <li class="mobile-dropdown-item">
                             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="{{ route('csrf.intro') }}">General Intro</a>
@@ -41,10 +41,10 @@
                         <li class="mobile-dropdown-item">
                             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">About</a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li>
-                    <a class="nav-link font-semibold text-blue-600" href="{{ route('csrf.demo') }}">CSRF LAB</a>
+                    <a class="nav-link font-semibold" href="{{ route('csrf.demo') }}">CSRF LAB</a>
                 </li>
             </ul>
         </div>

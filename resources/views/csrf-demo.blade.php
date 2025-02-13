@@ -4,7 +4,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>CSRF LAB</title>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen bg-gray-50">
 @include('components.navbar') <!-- Include Navbar -->
     <div class= "flex-grow container mx-auto pt-20">
         <!-- <div class="max-w-3xl mx-10 mt-10 bg-gray-100 shadow-md rounded-lg p-12"> -->
@@ -12,8 +12,12 @@
             {{-- Scene Content --}}
             @if ($step == 1)
                 {{-- Scene 1: User Logs In --}}
-                <div class= "py-16 px-12">
-                    <h1 class="text-2xl font-bold mb-6">Scene 1: The User Logs In</h1>
+                <div class="py-16 px-12">
+                    <h1 class="text-2xl font-bold mb-4">Welcome Back: User Login</h1>
+                    <p class="mb-6 text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-indigo-600">
+                        <span class="font-semibold text-indigo-600">What's happening?</span><br>
+                        Experience a typical login scenario and understand how session management works. This is the foundation of how CSRF attacks can occur.
+                    </p>
                     <div>
                         <p class="mb-6">
                             Yesterday, you logged into your account on your favorite website—let’s call it "Oceana." 
@@ -27,22 +31,13 @@
                 </div>
             @elseif ($step == 2)
                 {{-- Scene 2: Suspicious Email --}}
-                <div class= "py-16 px-12">
-                    <h1 class="text-2xl font-bold mb-4">Scene 2: You Receive a Suspicious Email</h1>
+                <div class="py-16 px-12">
+                    <h1 class="text-2xl font-bold mb-4">Alert: Suspicious Email Received</h1>
+                    <p class="mb-6 text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-red-600">
+                        <span class="font-semibold text-red-600">What's happening?</span><br>
+                        Learn how phishing emails can trick users into compromising their accounts. This is a common tactic used in CSRF attacks.
+                    </p>
                     <p class="mb-6">This morning, as you're browsing the web, you get an email in your inbox:</p>
-                    <!--<div class="bg-gray-100 p-4 rounded border mb-6">
-                        <p><strong>Subject:</strong> "Important: Your password reset request"</p>
-                        <p>Hello [Your Name],</p>
-                        <p>
-                            We received a request to reset your password. If you made this request, click the link below to reset your password:
-                        </p>
-                        <a href="{{ route('csrf.demo', ['step' => 'phishing']) }}" class="text-blue-500 hover:underline">
-                            Click Here to Reset Your Password
-                        </a>
-                        <p class="mt-4">If you didn't request a password reset, please disregard this email.</p>
-                        <p>Best regards,<br>The SecureSite Team</p>
-                    -->
-
                     <!-- The email -->
                     <div class="p-4 rounded border mb-6">
                         <table align="center" width="100%" style="box-sizing:border-box;border-spacing:0;border-collapse:collapse;max-width:544px;margin-right:auto;margin-left:auto;width:100%!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">
@@ -223,7 +218,11 @@
             @elseif ($step == 'phishing')
                 {{-- Scene 3: Phishing Page --}}
                 <div class= "py-16 px-12">
-                    <h1 class="text-2xl font-bold mb-4">Scene 3: Phishing Page</h1>
+                    <h1 class="text-2xl font-bold mb-4">Danger Zone: Phishing Page</h1>
+                    <p class="mb-6 text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-red-600">
+                        <span class="font-semibold text-red-600">What's happening?</span><br>
+                        See how attackers create fake pages to steal your information. This is a critical step in a CSRF attack.
+                    </p>
                     <div class="p-8 rounded border mb-6">
                         <form action="{{ route('csrf.demo', ['step' => 'phishing-success']) }}" method="POST">
                             <div class="space-y-12">
@@ -308,7 +307,11 @@
             @elseif ($step == 'phishing-success')
                 {{-- Scene 4: Phishing Success --}}
                 <div class= "py-16 px-12">
-                    <h1 class="text-2xl font-bold mb-4">Scene 4: Details Updated Successfully</h1>
+                    <h1 class="text-2xl font-bold mb-4">Attack Successful: Details Updated</h1>
+                    <p class="mb-6 text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-red-600">
+                        <span class="font-semibold text-red-600">What's happening?</span><br>
+                        Understand the consequences of falling for a phishing attack. This shows how easily attackers can exploit vulnerabilities.
+                    </p>
                     <p class="mb-6">Your details have been updated. Thank you!</p>
                     <!-- Button to open the modal -->
                     <div class="mt-6 flex items-center justify-end gap-x-6">
@@ -374,7 +377,11 @@
 
                 <!-- Needs more styling since it doesn't look appealing -->
                 <div class= "py-16 px-12">
-                    <h1 class="text-2xl font-bold mb-4">Now, let’s show how Oceana can prevent this from happening by using CSRF protection in Laravel.</h1>
+                    <h1 class="text-2xl font-bold mb-4">Protection Activated: CSRF Tokens</h1>
+                    <p class="mb-6 text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-green-600">
+                        <span class="font-semibold text-green-600">What's happening?</span><br>
+                        Discover how CSRF tokens can prevent unauthorized actions. This is the key to securing your applications.
+                    </p>
 
                     <div class="mb-6">
                         <h2 class="text-lg font-semibold px-2">CSRF Token: The Fix</h2>
@@ -409,9 +416,12 @@
 
                 <!-- Needs more styling since it doesn't look appealing -->
                 <div class= "py-16 px-12">
-                    <h1 class="text-2xl font-bold mb-4">Let's Test It</h1>
+                    <h1 class="text-2xl font-bold mb-4">Hands-On: Test CSRF Protection</h1>
                     <!-- <p class="mb-2">Let’s show this in action:</p> -->
-
+                    <p class="mb-6 text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-green-600">
+                        <span class="font-semibold text-green-600">What's happening?</span><br>
+                        Compare forms with and without CSRF protection to see the difference. This will help you understand how CSRF tokens prevent attacks.
+                    </p>
                     <div class="flex">
                         <!-- Left section for the Vulnerable Form -->
                         <div class="flex-1 p-4">
@@ -483,7 +493,7 @@
                             <!-- Malicious Form -->
                             <form id="att-vuln-form" action="/profile-vulnerable" method="POST">
                                 <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="Malicious User 1">
-                                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Malicious Submit (no CSRF)</button>
+                                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Malicious Submit (No CSRF)</button>
                             </form>
 
                             <!-- Hidden Toggle -->
@@ -633,19 +643,23 @@
             
             @elseif ($step == 'A_Conclusion')
                 {{-- Scene 7: A Conclusion --}}
-                <div class= "py-16 px-12">
-                    <h1 class="text-2xl font-bold mb-4">And Finally..</h1>
+                <div class="py-16 px-12">
+                    <h1 class="text-2xl font-bold mb-4">Wrap-Up: Key Takeaways</h1>
+                    <p class="mb-6 text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-indigo-600">
+                        <span class="font-semibold text-indigo-600">What did we learn?</span><br>
+                        Review what you've learned and understand the importance of CSRF protection. This knowledge will help you secure your applications.
+                    </p>
                     <p class="mb-6">
                         We reached the end of our demo, you've seen how CSRF works in real-world scenario,
                         a phishing email that leads to an attack and how CSRF protection is must because it can
                         save users from this kind of attack by validation requests before they're processed.
                         </br>
-                       You can learn more about CSRF by going to our about page or you can retry this mini demo. </br> Thank you!
+                        You can learn more about CSRF by going to our about page or you can retry this mini demo. </br> Thank you!
                     </p>
                     <a href="{{ route('csrf.demo', ['step' => 1]) }}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 float-right">
                         Start Over
                     </a> 
-                </div> 
+                </div>
 
             @else
                 {{-- Invalid Step --}}

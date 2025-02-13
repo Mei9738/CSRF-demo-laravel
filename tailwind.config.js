@@ -11,9 +11,9 @@ export default {
     ],
     theme: {
         extend: {
-            // fontFamily: {
-            //     sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            // },
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            },
         },
     },
     plugins: [
