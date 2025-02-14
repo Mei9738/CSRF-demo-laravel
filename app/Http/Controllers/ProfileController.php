@@ -22,12 +22,12 @@ class ProfileController extends Controller
     public function submitVulnerableForm(Request $request)
     {
         // Find the demo record by ID
-        $demo = Demo::find(1); // Assuming the ID is 1
+        $user1 = Demo::find(1); // Assuming the ID is 1
 
-        if ($demo) {
+        if ($user1) {
             // Update the name field with the submitted data
-            $demo->name = $request->input('name');
-            $demo->save(); // Save the updated record
+            $user1->name = $request->input('name');
+            $user1->save(); // Save the updated record
 
             // Redirect back with a success message
             return redirect()->route('csrf.demo', ['step' => 'Lets_Test_It'])->with('success', 'Name updated successfully.');
@@ -54,12 +54,12 @@ class ProfileController extends Controller
     public function submitProtectedForm(Request $request)
     {
         // Find the demo record by ID
-        $demo = Demo::find(1); // Assuming the ID is 1
+        $user2 = Demo::find(2); // Assuming the ID is 1
 
-        if ($demo) {
+        if ($user2) {
             // Update the name field with the submitted data
-            $demo->name = $request->input('name');
-            $demo->save(); // Save the updated record
+            $user2->name = $request->input('name');
+            $user2->save(); // Save the updated record
 
             // Redirect back with a success message
             return redirect()->route('csrf.demo', ['step' => 'Lets_Test_It'])->with('success', 'Name updated successfully.');

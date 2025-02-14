@@ -441,7 +441,7 @@
                             <!-- Vulnerable Form -->
                             <form id="vuln-form" action="/profile-vulnerable" method="POST">
                                 <!-- No CSRF token -->
-                                <input type="text" name="name" value="{{ $demo->name }}" class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm">
+                                <input type="text" name="name" value="{{ $user1->name }}" class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm">
                                 <button for="vulnerable" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit (No CSRF)</button>
                             </form>
                             
@@ -589,7 +589,7 @@
                             <!-- Protected Form -->
                             <form id="safe-form" action="/profile-protected" method="POST">
                                 @csrf
-                                <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="{{$demo->name}}">
+                                <input class="rounded-md bg-white px-3 py-1.5 mr-2 text-base text-gray-900 border border-gray-300 focus:border-2 focus:border-indigo-600 focus:outline-none placeholder:text-gray-400 sm:text-sm" type="text" name="name" value="{{$user2->name}}">
                                 <button for="safe" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit">Submit (With CSRF)</button>
                             </form>    
 

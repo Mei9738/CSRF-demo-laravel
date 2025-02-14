@@ -40,14 +40,15 @@ Route::get('/csrf-demo', function () {
     // Get the step parameter from the request, defaulting to 1
     $step = request('step', 1); // Default to scene 1 if no step is provided
     
-    $demo = App\Models\Demo::find(1);
+    $user1 = App\Models\Demo::find(1);
+    $user2 = App\Models\Demo::find(2);
     
-    if (!$demo) {
-        return redirect()->route('csrf.demo')->with('error', 'Demo data not found.');
+    if (!$user1 || !$user2 ) {
+        return redirect()->route('csrf.demo')->with('error', 'User data not found.');
     }
 
     // Return the view with the demo data and step
-    return view('csrf-demo', ['step' => $step, 'demo' => $demo]);
+    return view('csrf-demo', ['step' => $step, 'user1' => $user1,'user2' => $user2 ]);
 })->name('csrf.demo');
 
 
